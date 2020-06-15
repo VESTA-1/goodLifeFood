@@ -2,11 +2,12 @@ package goodlifefood;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class GoodLifeFood
 {
-    public static void main(String[] args)throws FileNotFoundException,IOException 
+    public static void main(String[] args)throws SQLException 
     {
         Scanner sc = new Scanner(System.in);
         interfaceShow menu = new interfaceShow();

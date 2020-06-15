@@ -2,17 +2,13 @@ package goodlifefood;
 
 import java.util.Scanner;
 import java.io.*;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.sql.SQLException;
+
 public class interfaceShow
 {
     Scanner sc = new Scanner(System.in);
     
-    public void showMenu()throws FileNotFoundException,IOException 
+    public void showMenu() throws SQLException
     {
         int input;
         do {
@@ -22,7 +18,7 @@ public class interfaceShow
         }while(input != 1 && input != 2 && input != 3);
     }
     
-    public void getMenuInput(int input)throws FileNotFoundException,IOException 
+    public void getMenuInput(int input)throws SQLException 
     {
         if (input == 1)
             showLogin();
@@ -42,27 +38,26 @@ public class interfaceShow
         String strP = sc.next();
     }
     
-    public void showRegister()throws FileNotFoundException,IOException 
+    public void showRegister()throws SQLException 
     {
         System.out.print("請輸入你的帳號:\n");
-        String strA = sc.next();
+        String strI = sc.next();
         System.out.print("請輸入你的密碼:\n");
         String strP = sc.next();
         System.out.print("請輸入你的位址:\n");
-        String strAddress = sc.next();
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("hello");
-        XSSFRow row = sheet.createRow(0);
-        XSSFCell cell = row.createCell(2);
-        cell.setCellValue("hello sheet");
-        FileOutputStream fos = new FileOutputStream(new File("account.xlsx"));
-        workbook.write(fos);
-        workbook.close();
-        fos.close();
-}
-       /* Workbook wb = WorkbookFactory.create("account.xlsx");
-        FileOutputStream out = new FileOutputStream("account.xlsx");
-        wb.write(out);
-        out.close();
-        System.out.println("createworkbook.xlsx written successfully");*/
+        String strA = sc.next();
+        if( !"".equals(strI) && !"".equals(strP) && !"".equals(strA))
+        {
+            guests g = new guests();
+            if(g.register(strI, strP, strA, 0) == 1)
+            {
+                System.out.println("註冊成功");
+                showMenu();
+            }
+            else
+                System.out.println("註冊失敗");
+        }
+        else
+            System.out.println("你有欄位未填");
+    }
 }

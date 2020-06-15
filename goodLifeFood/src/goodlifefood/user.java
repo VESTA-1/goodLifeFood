@@ -2,15 +2,15 @@ package goodlifefood;
 
 public class user
 {
-    private String account,password;
-    private int authority;
+    protected String userID,password;
+    int authority;
     
-    public void setAccount()
+    public void setID()
     {
         
     }
     
-    public String getAccount()
+    public String getID()
     {
         String str = "";
         return str;
